@@ -1,0 +1,158 @@
+[{
+  "name": "고철주",
+  "class": "node",
+  "textclass": "nodeText",
+  "depthOffset": 2,
+  "marriages": [
+    {
+      "spouse": {
+        "name": "000",
+        "class": "node"
+      },
+      "children": [
+        {
+          "name": "고광희",
+          "class": "node",
+          "marriages": [
+            {
+              "spouse": {
+                "name": "000",
+                "class": "node"
+              },
+              "children": [
+                {
+                  "name": "고재선",
+                  "class": "node",
+                  "marriages": [
+                    {
+                      "spouse": {
+                        "name": "장OO",
+                        "class": "node"
+                      },
+                      "children": [
+                        {
+                          "name": "고중석"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "고재호",
+                  "class": "node",
+                  "marriages": [
+                    {
+                      "spouse": {
+                        "name": "민OO",
+                        "class": "node"
+                      },
+                      "children": [
+                        {
+                          "name": "고수경",
+                          "class": "node",
+                          "marriages": [
+                            {
+                              "spouse": {
+                                "name": "최종영",
+                                "class": "node"
+                              },
+                              "children": [
+                                {
+                                  "name": "최OO",
+                                  "class": "node",
+                                  "marriages": [
+                                    {
+                                      "spouse": {
+                                        "name": "나상용",
+                                        "class": "node"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "최성우",
+                                  "class": "node",
+                                  "marriages": [
+                                    {
+                                      "spouse": {
+                                        "name": "호제훈",
+                                        "class": "node"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "고재량",
+                  "class": "node"
+                },
+                {
+                  "name": "고재청",
+                  "class": "node"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "name": "사광욱",
+  "class": "node",
+  "textclass": "nodeText",
+  "depthOffset": 2,
+  "marriages": [
+    {
+      "spouse": {
+        "name": "OOO",
+        "class": "node"
+      },
+      "children": [
+        {
+          "name": "사현자",
+          "class": "node",
+          "marriages": [
+            {
+              "spouse": {
+                "name": "김형선",
+                "class": "lawer"
+              },
+              "children": [
+                {
+                  "name": "김대규"
+                },
+                {
+                  "name": "김유진"
+                },
+                {
+                  "name": "김중규"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "사OO",
+          "class": "node",
+          "marriages": [
+            {
+              "spouse": {
+                "name": "윤형한",
+                "class": "lawer"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}]
