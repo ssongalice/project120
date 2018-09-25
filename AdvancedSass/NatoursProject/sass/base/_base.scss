@@ -9,6 +9,11 @@
 html {
     // This defines what 1rem is;
     font-size: 10px;
+
+    respond-phone {
+        font-size: 50%;
+    }
+
 }
 
 body {
