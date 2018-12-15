@@ -6,9 +6,12 @@ Make it run without errors but you cannot change the location of the `let` state
 
 ```js
 function doAsyncTask(cb) {
-  cb();
+  setImmediate(() => {
+      console.log("Async Task Calling Callback");
+      cb();
+  })
 }
-doAsyncTask(_ => console.log(message));
+doAsyncTask(() => console.log(message));
 
 let message = "Callback Called";
 ```
