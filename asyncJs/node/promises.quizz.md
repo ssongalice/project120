@@ -4,6 +4,8 @@ Create a promise version of the async readFile function
 
 ```js
 const fs = require("fs");
+const util = require("util");
+const readFile = util.promisify(fs.readFile);
 
 function readFile(filename, encoding) {
   return new Promise((resolve, reject) => {
@@ -28,9 +30,12 @@ const fs = require("fs");
 const zlib = require("zlib");
 
 function zlibPromise(data) {
-  zlib.gzip(data, (error, result) => {
-    //TODO
-  });
+    return new Promise((resolve, reject) => {
+        zlib.gzip(data, (err, result) => {
+          if (err) reject(err);
+          resolve(result);
+        });
+    })
 }
 
 function readFile(filename, encoding) {
@@ -43,13 +48,60 @@ function readFile(filename, encoding) {
 }
 
 readFile("./files/demofile.txt", "utf-8")
-    .then(...) // --> Load it then zip it and then print it to screen
+    .then(data => {
+        gzip(data).then(
+            res => console.log(rest),
+            err => console.error("Failed: ", err),
+        )
+    },
+    err => console.error("Failed to read", err)
+) // --> Load it then zip it and then print it to screen
+
 });
 ```
 
 # Question 3
 
 Convert the previous code so that it now chains the promise as well.
+
+```js
+const fs = require("fs");
+const zlib = require("zlib");
+
+function zlibPromise(data) {
+    return new Promise((resolve, reject) => {
+        zlib.gzip(data, (err, result) => {
+          if (err) reject(err);
+          resolve(result);
+        });
+    })
+}
+
+function readFile(filename, encoding) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, encoding, (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  });
+}
+
+readFile("./files/demofile.txt", "utf-8")
+    .then(
+        data => {
+            return gzip(data);
+        },
+        err => console.error("Failed to Read", err)
+    )
+    .then( data => {
+        console.log(data)
+    }, err => console.error("Failed gzip:", err)
+    );
+});
+```
+
+
+
 
 # Question 4
 
