@@ -234,10 +234,10 @@ Promise.resolve("done")
 The `catch` function works exactly the same way as the `then` error handler, it's just clearer and more explicitly describes our intent to handle errors.
 
 ```js
-Promise.resolve("done")
-  .then(val => {
-    throw "fail";
-  })
+Promise.reject("done")
+  // .then(val => {
+  //   throw "fail";
+  // })
   .then(val => console.log(val))
   .catch(err => console.error(err));
 ```

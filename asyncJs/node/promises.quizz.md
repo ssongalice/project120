@@ -100,12 +100,46 @@ readFile("./files/demofile.txt", "utf-8")
 });
 ```
 
-
-
-
 # Question 4
 
 Convert the previous code so that it now handles errors using the catch handler
+
+```js
+const fs = require("fs");
+const zlib = require("zlib");
+
+function zlibPromise(data) {
+    return new Promise((resolve, reject) => {
+        zlib.gzip(data, (err, result) => {
+          if (err) reject(err);
+          resolve(result);
+        });
+    })
+}
+
+function readFile(filename, encoding) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, encoding, (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  });
+}
+
+readFile("./files/demofile.txt", "utf-8")
+    .then(
+        data => {
+            return gzip(data);
+        }
+    )
+    .then( data => {
+        console.log(data)
+    })
+    .catch(err => console.error("Failed To Gzip: ", err));
+});
+```
+
+
 
 # Question 5
 
@@ -116,12 +150,21 @@ function readFileFake(sleep) {
   return new Promise(resolve => setTimeout(resolve, sleep));
 }
 
+function readFileFake(sleep) {
+    return new Promise((_, reject) => setTimeout(reject, sleep, "timeout"));
+}
+
+Promise.race([readFileFake(5000), timeout(1000)])
+        .then(data =>
+        console.log(data)
+    ).catch(err => console.error(err));
+
 readFileFake(5000); // This resolves a promise after 5 seconds, pretend it's a large file being read from disk
 ```
 
 # Question 6
 
-Create a process flow which publishes a file from a server, then realises the user needs to login, then makes a login request, the whole chain should error out if it takes longer than 1 seconds. Use `catch` to handle errors and timeouts.
+Create a process flow which publishes a file from a server, then realises the user needs to login, then makes a login request, the whole chain should error out if it takes longer than 3 seconds. Use `catch` to handle errors and timeouts.
 
 ```js
 function authenticate() {
@@ -138,8 +181,30 @@ function timeout(sleep) {
   return new Promise((resolve, reject) => setTimeout(reject, sleep, "timeout"));
 }
 
+function safePublish() {
+    return publish().then(res => {
+        if (res.status === 403) {
+            return authenticate();
+        }
+        return res;
+    });
+}
+
 Promise.race( [publish(), timeout(3000)])
-  .then(...)
-  .then(...)
-  .catch(...);
+  .then(res => {
+      if (res.status === 403) {
+        return authenticate()  
+      }
+  })
+  .then(
+    _ => console.log("Published")
+  )
+  .catch(
+      err => {
+            if (err === "timeout") {
+                console.error("Request timed out");
+            } else {
+                console.error(err);
+            }
+      });
 ```
