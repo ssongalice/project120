@@ -9,11 +9,14 @@ const readFile = util.promisify(fs.readFile);
 
 const files = ["./files/demofile.txt", "./files/demofile.other.txt"];
 
-let promises = files.map(name => readFile(name, { encoding: "utf8" }));
-Promise.all(promises).then(values => {
-  // <-- Uses .all
-  console.log(values);
-});
+(async() => {
+    for (let file of files) {
+        let promises = files.map(name => readFile(name, "utf8"));
+        let value = await Promise.all(promises);
+        console.log(values);
+    }
+})();
+
 ```
 
 # Question 2
