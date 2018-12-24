@@ -114,7 +114,7 @@ What does the below code print?
 
 ```js
 async function printLine1() {
-  console.log("1");
+  setImmediate(_ => console.log("1"));
 }
 
 async function printLine2() {
@@ -145,7 +145,7 @@ It's a subtle difference, but now you can iterate over iterators that return pro
 
   const files = ["./files/demofile.txt", "./files/demofile.other.txt"];
   const promises = files.map(name => readFile(name, "utf8"));
-  for await (let content of promises) {
+  for await (let file of promises) {
     //<-- See the await is on the for
     console.log(content);
   }
