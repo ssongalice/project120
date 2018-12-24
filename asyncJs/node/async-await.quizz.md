@@ -30,7 +30,15 @@ const fileIterator = files => ({
   [Symbol.asyncIterator]: () => ({
     x: 0,
     next() {
-      // TODO
+       if(this.x >= files.length) {
+           return Promise.resolve({ done: true });
+       }
+
+       let file = files[this.x++];
+       return  readFile(file, "utf8").then(data => ({
+           done: false,
+           value: data
+        }));
     }
   })
 });
